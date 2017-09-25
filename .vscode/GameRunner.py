@@ -35,7 +35,7 @@ class GameMangaer:
         Position(pos1).chessPiece = None
      
     def canMove(self, pos1, pos2):
-        if Position.isValid(pos1) or Position.isValid(pos2) or pos1 == pos2:
+        if not Position.isValid(pos1) or not Position.isValid(pos2) or pos1 == pos2:
             return False
         elif ChessPiece(Position(pos1).chessPiece).color.__eq__(ChessPiece(Position(pos2).chessPiece).color):
             print('Pieces From The Same Team!')

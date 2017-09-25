@@ -49,13 +49,11 @@ class ChessBoard:
             row = []
             for j in range(ChessBoard.SQRS_IN_ROW):
                 row.append(Position(i+1,j+1))
-            self.positionsTable.append[row]
+            self.positionsTable.append(row)
 
-    def initCharStartingPositions(self, blackObjects, whiteObjects):
-        if type(blackObjects) != list or type(whiteObjects) != list : return
+    def initCharStartingPositions(self):
         for i in range(ChessBoard.SQRS_IN_ROW):
             Position(self.positionsTable[ChessBoard.WHITE_PAWNS_ROW][i]).chessPiece = ChessPiece("Pawn", 'White')
-            list(whiteObjects).append(Position(self.positionsTable[ChessBoard.WHITE_PAWNS_ROW][i]).chessPiece)
         for i in range(ChessBoard.SQRS_IN_ROW):
             Position(self.positionsTable[ChessBoard.WHITE_NOBILITY_ROW][i]).chessPiece = {
                 0 : ChessPiece('Rook', 'White'),
@@ -67,10 +65,8 @@ class ChessBoard:
                 6 : ChessPiece('Knight', 'White'),
                 7 : ChessPiece('Rook', 'White')
             }[i]
-            list(whiteObjects).append(Position(self.positionsTable[ChessBoard.WHITE_NOBILITY_ROW][i]).chessPiece)
         for i in range(ChessBoard.SQRS_IN_ROW):
                 Position(self.positionsTable[ChessBoard.BLACK_PAWNS_ROW][i]).chessPiece = ChessPiece("Pawn", 'Black')
-                list(blackObjects).append(Position(self.positionsTable[ChessBoard.BLACK_PAWNS_ROW][i]).chessPiece)
         for i in range(ChessBoard.SQRS_IN_ROW):
             Position(self.positionsTable[ChessBoard.BLACK_NOBILITY_ROW][i]).chessPiece = {
                 0 : ChessPiece('Rook', 'Black'),
@@ -82,7 +78,6 @@ class ChessBoard:
                 6 : ChessPiece('Knight', 'Black'),
                 7 : ChessPiece('Rook', 'Black')
             }[i]
-            list(blackObjects).append(Position(self.positionsTable[ChessBoard.BLACK_NOBILITY_ROW][i]).chessPiece)
     
     def countAliveByColor(self, color):
         counter = 0
@@ -106,8 +101,8 @@ class ChessBoard:
         return Position(position).x > 0 and Position(position).x < ChessBoard.SQRS_IN_ROW and Position(position).y > 0 and Position(position).y < ChessBoard.SQRS_IN_ROW
 
     def objectsBetween(self, pos1, pos2):
-        if not Position.isValid(pos1) or not Position.isValid(pos2) or pos1 == pos2
-            return
+        if not Position.isValid(pos1) or not Position.isValid(pos2) or pos1.__eq__(pos2):
+            return False
         x1 = Position(pos1).x
         y1 = Position(pos1).y
         x2 = Position(pos2).x
@@ -127,12 +122,12 @@ class ChessBoard:
                 if not Position(self.positionsTable[x1][i]).isEmpty():
                     return True
         return False
-    
+ 
     def printBoard(self):
         for i in range(ChessBoard.SQRS_IN_ROW):
             row = ''
             for j in range(ChessBoard.SQRS_IN_ROW):
-                line += self.positionsTable[i,j]
+                row += '[{0} : {1}]'.format(self.positionsTable[i][j].__str__(),ChessPiece(Position(self.positionsTable[i][j]).chessPiece).char)
             print(row)
 
 class Position:
