@@ -1,5 +1,5 @@
 from GameObjects import *
 
 board = ChessBoard()
-board.initPositions()
+board.initCharStartingPositions()
 board.printBoard()
