@@ -3,6 +3,8 @@ from GameObjects import *
 class GameMangaer:
     
     Colors = ('Black', 'White')
+    blackObjects = []
+    whiteObjects = []
 
     def __init__(self):
         self.chessBoard = ChessBoard()
