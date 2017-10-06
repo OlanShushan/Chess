@@ -130,6 +130,7 @@ class ChessBoard:
                 row += '[{0} : {1}]'.format(self.positionsTable[i][j].__str__(),ChessPiece(Position(self.positionsTable[i][j]).chessPiece).char)
             print(row)
 
+    
 class Position:
 
     def __init__(self, x=-1, y=-1):
